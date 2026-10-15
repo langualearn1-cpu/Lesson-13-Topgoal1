@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordinal Numbers | الأعداد الترتيبية | المعلم: ماجد السويهري</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Friendly Cartoon Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Cairo:wght@600;700;800;900&family=Fredoka:wght@500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Fredoka', 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #fef3c7 0%, #ffedd5 25%, #fce7f3 50%, #e0e7ff 75%, #bae6fd 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 3D Title Lettering */
+        .title-3d-blue {
+            color: #0284c7;
+            -webkit-text-stroke: 1.8px #0369a1;
+            text-shadow: 
+                0 2px 0 #0284c7,
+                0 4px 0 #075985,
+                0 7px 14px rgba(3, 105, 161, 0.4);
+        }
+
+        /* 3D Shiny Golden Balloon Numbers matching the worksheet */
+        .balloon-num-gold {
+            background: linear-gradient(180deg, #fef08a 0%, #facc15 35%, #eab308 65%, #ca8a04 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 0 #92400e) drop-shadow(0 4px 5px rgba(180, 83, 9, 0.35));
+            font-family: 'Baloo 2', 'Fredoka', sans-serif;
+            font-weight: 800;
+            line-height: 1;
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Bright Red Superscript (st, nd, rd, th) */
+        .ordinal-super-red {
+            color: #dc2626;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 800;
+            text-shadow: 0 1px 1px rgba(220, 38, 38, 0.3);
+            margin-left: 2px;
+        }
+
+        /* Realistic Wooden Hanging Plaque */
+        .wooden-sign {
+            background: linear-gradient(180deg, #ddb372 0%, #c59751 45%, #b17e37 70%, #8f5c1d 100%);
+            border: 3.5px solid #5a380e;
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.22),
+                inset 0 2px 3px rgba(255, 255, 255, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            transform: rotate(-3deg);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+        }
+        .wooden-sign:hover {
+            transform: rotate(0deg) scale(1.03);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.28);
+        }
+
+        .sign-rope-left, .sign-rope-right {
+            position: absolute;
+            top: -24px;
+            width: 4px;
+            height: 26px;
+            background: linear-gradient(to bottom, #784712, #a16220);
+            border-radius: 2px;
+        }
+        .sign-rope-left { left: 24px; transform: rotate(-10deg); }
+        .sign-rope-right { right: 24px; transform: rotate(10deg); }
+
+        /* Main Worksheet Paper Frame */
+        .worksheet-frame {
+            background-color: #fffef9;
+            background-image: 
+                radial-gradient(#fde047 1.2px, transparent 1.2px),
+                radial-gradient(#93c5fd 1.2px, transparent 1.2px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            border: 6px solid #fbcfe8;
+            border-radius: 36px;
+            box-shadow: 
+                0 20px 45px -10px rgba(0, 0, 0, 0.15),
+                0 0 0 4px #bae6fd,
+                0 0 0 8px #fef08a;
+        }
+
+        /* Attention & Speaking Pulses */
+        .is-speaking-active {
+            animation: card-active-pulse 0.9s infinite alternate;
+            box-shadow: 0 0 0 4px #38bdf8, 0 8px 24px rgba(56, 189, 248, 0.45) !important;
+            transform: scale(1.03) !important;
+            background-color: #f0f9ff !important;
+        }
+        @keyframes card-active-pulse {
+            0% { transform: scale(1.01); }
+            100% { transform: scale(1.04); }
+        }
+
+        /* Arrow Line Animation */
+        .match-arrow-path {
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: drawArrowAnim 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+        }
+        @keyframes drawArrowAnim {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .connector-pin {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2.5px solid #ffffff;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+            transition: all 0.25s ease;
+        }
+        .connector-pin.active-pulse {
+            transform: scale(1.4);
+            box-shadow: 0 0 0 5px rgba(2, 132, 199, 0.45);
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 text-slate-800">
+
+    <div class="max-w-4xl mx-auto worksheet-frame p-3.5 sm:p-6 md:p-8 relative">
+
+        <!-- Top Control Bar (Voice, Speed, Tour, Audio FX) -->
+        <div class="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b-2 border-dashed border-amber-200">
+            <!-- Voice and Speed Engine -->
+            <div class="flex items-center gap-2 flex-wrap">
+                <div class="flex items-center bg-white px-2.5 py-1.5 rounded-xl border border-sky-200 shadow-xs">
+                    <span class="text-xs font-bold text-sky-700 mr-1.5 flex items-center gap-1">🎙️ Voice:</span>
+                    <select id="voiceSelect" onchange="changeVoice()" class="text-xs font-semibold text-slate-700 bg-transparent outline-none max-w-[150px] sm:max-w-[200px] cursor-pointer">
+                        <option value="">Auto Natural Voice</option>
+                    </select>
+                </div>
+                <button onclick="toggleSpeechRate()" id="speedBtn" class="bg-white hover:bg-sky-50 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold border border-sky-200 shadow-xs flex items-center gap-1 transition-all">
+                    <span>🐇</span>
+                    <span id="speedLabel">Normal</span>
+                </button>
+            </div>
+
+            <!-- Sound & Auto-Reader Tour -->
+            <div class="flex items-center gap-2 flex-wrap">
+                <button onclick="readFullLessonTour()" id="tourBtn" class="bg-sky-600 hover:bg-sky-700 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold shadow-xs transition-all flex items-center gap-1.5">
+                    <span>▶️</span>
+                    <span>Listen All (استمع لجميع الأعداد)</span>
+                </button>
+                <button onclick="toggleAudioFX()" id="soundToggleBtn" class="bg-white hover:bg-slate-50 text-slate-700 p-2 rounded-xl text-xs font-bold border border-slate-200 shadow-xs" title="Mute/Unmute FX">
+                    🔊
+                </button>
+            </div>
+        </div>
+
+        <div class="relative mt-3 mb-4 pt-2">
+            <!-- Header Grid: Wooden Plaque + Logo -->
+            <div class="flex items-start justify-between">
+                <!-- Wooden Hanging Sign (المعلم: ماجد السويهري) -->
+                <div class="relative z-10 shrink-0 cursor-pointer" onclick="greetTeacher()" title="انقر للترحيب بالمعلم">
+                    <div class="sign-rope-left"></div>
+                    <div class="sign-rope-right"></div>
+                    <div class="wooden-sign px-3 sm:px-4 py-2 text-center shadow-lg">
+                        <div class="text-[11px] sm:text-xs font-black text-amber-100 font-cairo">المعلم:</div>
+                        <div class="text-xs sm:text-sm md:text-base font-black text-white font-cairo tracking-wide drop-shadow-sm">ماجد السويهري</div>
+                    </div>
+                </div>
+
+                <!-- LANGUA LEARN Brand Logo -->
+                <div class="bg-white/95 px-3 py-1.5 rounded-2xl border-2 border-rose-200 shadow-xs flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-white text-base font-bold shadow-xs">
+                        🎓
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs sm:text-sm font-black text-slate-800 tracking-tight leading-none">LANGUA LEARN</div>
+                        <div class="text-[9px] text-rose-500 font-bold uppercase tracking-wider">Learn, Grow, Succeed</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Centered 3D Title with Stars and Balloons -->
+            <div class="text-center mt-2 mb-2">
+                <div class="flex items-center justify-center gap-2 mb-1">
+                    <span class="text-xl">⭐</span>
+                    <span class="text-xl">🎈</span>
+                    <span class="text-2xl font-black text-amber-500">✨</span>
+                    <span class="text-xl">🎈</span>
+                    <span class="text-xl">⭐</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-black title-3d-blue tracking-tight flex items-center gap-3 justify-center">
+                    <span>Ordinal numbers</span>
+                </h1>
+                <p class="text-xs sm:text-sm font-bold text-sky-800 mt-1 font-cairo" dir="rtl">
+                    انقر على أي رقم ترتيبي للاستماع إلى النطق الإنجليزي النقي وترجمته العربية 🔊
+                </p>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-2 sm:gap-3 mb-5 flex-wrap">
+            <button onclick="switchMode('lesson')" id="tabBtn-lesson" class="mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-1.5 transition-all bg-sky-600 text-white shadow-md">
+                <span>📖</span>
+                <span>ورقة الأعداد الترتيبية (Worksheet)</span>
+            </button>
+            <button onclick="switchMode('matching')" id="tabBtn-matching" class="mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-1.5 transition-all bg-white text-slate-700 hover:bg-sky-50 border border-slate-200 shadow-xs">
+                <span>🏹</span>
+                <span>صل بالأسهم (Arrow Matching)</span>
+            </button>
+            <button onclick="switchMode('unscramble')" id="tabBtn-unscramble" class="mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-1.5 transition-all bg-white text-slate-700 hover:bg-sky-50 border border-slate-200 shadow-xs">
+                <span>🔠</span>
+                <span>رتب حروف الكلمة (Spell It)</span>
+            </button>
+            <button onclick="switchMode('quiz')" id="tabBtn-quiz" class="mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs sm:text-sm flex items-center gap-1.5 transition-all bg-white text-slate-700 hover:bg-sky-50 border border-slate-200 shadow-xs">
+                <span>⚠️</span>
+                <span>تحدي الإملاء الترتيبي (Quiz)</span>
+            </button>
+        </div>
+
+        <div id="view-lesson" class="tab-view block space-y-5">
+
+            <!-- SECTION A: Top Box (1st to 10th - Warm Pastel Container) -->
+            <div class="bg-amber-50/70 border-3 border-amber-200 rounded-3xl p-3 sm:p-5 shadow-xs">
+                <div class="flex items-center justify-between mb-3 pb-2 border-b-2 border-amber-100">
+                    <span class="text-xs font-black text-amber-800 uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="text-sm">🌟</span> Section 1: Basic Ordinal Numbers
+                    </span>
+                    <span class="font-cairo text-xs font-bold text-amber-700 bg-white px-2.5 py-0.5 rounded-lg border border-amber-200" dir="rtl">
+                        الأعداد الترتيبية الأساسية
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                    
+                    <!-- Left Column: 1st, 2nd, 3rd, 5th -->
+                    <div class="space-y-2.5">
+                        <!-- 1st First -->
+                        <div id="card-1st" onclick="speakOrdinal('First', '1st', 'الأول')" class="cursor-pointer bg-white hover:bg-amber-100/50 p-2.5 sm:p-3 rounded-2xl border-2 border-amber-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">1</span><sup class="ordinal-super-red text-sm sm:text-base">st</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">First</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-slate-500 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">الأول 🔊</span>
+                        </div>
+
+                        <!-- 2nd Second -->
+                        <div id="card-2nd" onclick="speakOrdinal('Second', '2nd', 'الثاني')" class="cursor-pointer bg-white hover:bg-amber-100/50 p-2.5 sm:p-3 rounded-2xl border-2 border-amber-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">2</span><sup class="ordinal-super-red text-sm sm:text-base">nd</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Second</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-slate-500 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">الثاني 🔊</span>
+                        </div>
+
+                        <!-- 3rd Third -->
+                        <div id="card-3rd" onclick="speakOrdinal('Third', '3rd', 'الثالث')" class="cursor-pointer bg-white hover:bg-amber-100/50 p-2.5 sm:p-3 rounded-2xl border-2 border-amber-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">3</span><sup class="ordinal-super-red text-sm sm:text-base">rd</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Third</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-slate-500 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">الثالث 🔊</span>
+                        </div>
+
+                        <!-- 5th Fifth -->
+                        <div id="card-5th" onclick="speakOrdinal('Fifth', '5th', 'الخامس')" class="cursor-pointer bg-white hover:bg-amber-100/50 p-2.5 sm:p-3 rounded-2xl border-2 border-amber-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">5</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Fifth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-slate-500 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">الخامس 🔊</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: 6th, 7th, 8th, 10th -->
+                    <div class="space-y-2.5">
+                        <!-- 6th Sixth -->
+                        <div id="card-6th" onclick="speakOrdinal('Sixth', '6th', 'السادس')" class="cursor-pointer bg-white hover:bg-amber-100/50 p-2.5 sm:p-3 rounded-2xl border-2 border-amber-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">6</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Sixth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-slate-500 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">السادس 🔊</span>
+                        </div>
+
+                        <!-- 7th Seventh -->
+                        <div id="card-7th" onclick="speakOrdinal('Seventh', '7th', 'السابع')" class="cursor-pointer bg-white hover:bg-amber-100/50 p-2.5 sm:p-3 rounded-2xl border-2 border-amber-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">7</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Seventh</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-slate-500 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">السابع 🔊</span>
+                        </div>
+
+                        <!-- 8th Eighth -->
+                        <div id="card-8th" onclick="speakOrdinal('Eighth', '8th', 'الثامن')" class="cursor-pointer bg-white hover:bg-amber-100/50 p-2.5 sm:p-3 rounded-2xl border-2 border-amber-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">8</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Eighth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-slate-500 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">الثامن 🔊</span>
+                        </div>
+
+                        <!-- 10th Tenth -->
+                        <div id="card-10th" onclick="speakOrdinal('Tenth', '10th', 'العاشر')" class="cursor-pointer bg-white hover:bg-amber-100/50 p-2.5 sm:p-3 rounded-2xl border-2 border-amber-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">10</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Tenth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-slate-500 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">العاشر 🔊</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="bg-sky-50/60 border-3 border-sky-200 rounded-3xl p-3 sm:p-5 shadow-xs">
+                <div class="flex items-center justify-between mb-3 pb-2 border-b-2 border-sky-100">
+                    <span class="text-xs font-black text-sky-800 uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="text-sm">🚀</span> Section 2: Teens & Twentieth
+                    </span>
+                    <span class="font-cairo text-xs font-bold text-sky-700 bg-white px-2.5 py-0.5 rounded-lg border border-sky-200" dir="rtl">
+                        من الحادي عشر حتى العشرون
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                    
+                    <!-- Left Column (11th to 15th - Soft Sky Blue tone) -->
+                    <div class="space-y-2.5">
+                        <!-- 11th Eleventh -->
+                        <div id="card-11th" onclick="speakOrdinal('Eleventh', '11th', 'الحادي عشر')" class="cursor-pointer bg-white hover:bg-sky-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-sky-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">11</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Eleventh</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-100">الحادي عشر 🔊</span>
+                        </div>
+
+                        <!-- 12th Twelfth -->
+                        <div id="card-12th" onclick="speakOrdinal('Twelfth', '12th', 'الثاني عشر')" class="cursor-pointer bg-white hover:bg-sky-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-sky-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">12</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Twelfth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-100">الثاني عشر 🔊</span>
+                        </div>
+
+                        <!-- 13th Thirteenth -->
+                        <div id="card-13th" onclick="speakOrdinal('Thirteenth', '13th', 'الثالث عشر')" class="cursor-pointer bg-white hover:bg-sky-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-sky-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">13</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Thirteenth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-100">الثالث عشر 🔊</span>
+                        </div>
+
+                        <!-- 14th Fourteenth -->
+                        <div id="card-14th" onclick="speakOrdinal('Fourteenth', '14th', 'الرابع عشر')" class="cursor-pointer bg-white hover:bg-sky-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-sky-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">14</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Fourteenth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-100">الرابع عشر 🔊</span>
+                        </div>
+
+                        <!-- 15th Fifteenth -->
+                        <div id="card-15th" onclick="speakOrdinal('Fifteenth', '15th', 'الخامس عشر')" class="cursor-pointer bg-white hover:bg-sky-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-sky-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">15</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Fifteenth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-100">الخامس عشر 🔊</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column (16th to 20th - Soft Lavender tone) -->
+                    <div class="space-y-2.5">
+                        <!-- 16th Sixteenth -->
+                        <div id="card-16th" onclick="speakOrdinal('Sixteenth', '16th', 'السادس عشر')" class="cursor-pointer bg-white hover:bg-purple-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-purple-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">16</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Sixteenth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-100">السادس عشر 🔊</span>
+                        </div>
+
+                        <!-- 17th Seventeenth -->
+                        <div id="card-17th" onclick="speakOrdinal('Seventeenth', '17th', 'السابع عشر')" class="cursor-pointer bg-white hover:bg-purple-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-purple-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">17</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Seventeenth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-100">السابع عشر 🔊</span>
+                        </div>
+
+                        <!-- 18th Eighteenth -->
+                        <div id="card-18th" onclick="speakOrdinal('Eighteenth', '18th', 'الثامن عشر')" class="cursor-pointer bg-white hover:bg-purple-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-purple-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">18</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Eighteenth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-100">الثامن عشر 🔊</span>
+                        </div>
+
+                        <!-- 19th Nineteenth -->
+                        <div id="card-19th" onclick="speakOrdinal('Nineteenth', '19th', 'التاسع عشر')" class="cursor-pointer bg-white hover:bg-purple-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-purple-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">19</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Nineteenth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-100">التاسع عشر 🔊</span>
+                        </div>
+
+                        <!-- 20th Twentieth -->
+                        <div id="card-20th" onclick="speakOrdinal('Twentieth', '20th', 'العشرون')" class="cursor-pointer bg-white hover:bg-purple-100/60 p-2.5 sm:p-3 rounded-2xl border-2 border-purple-200 flex items-center justify-between shadow-2xs transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="text-2xl sm:text-3xl">
+                                    <span class="balloon-num-gold group-hover:scale-110">20</span><sup class="ordinal-super-red text-sm sm:text-base">th</sup>
+                                </div>
+                                <span class="font-fredoka font-black text-lg sm:text-xl text-slate-800">Twentieth</span>
+                            </div>
+                            <span class="font-cairo text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-100">العشرون 🔊</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="pt-3 pb-1 text-center">
+                <!-- SVG illustration of children line carrying jars and savings boxes -->
+                <div class="max-w-md mx-auto h-20 sm:h-24">
+                    <svg viewBox="0 0 500 120" class="w-full h-full drop-shadow-sm">
+                        <!-- Kid 1 (Boy with jar) -->
+                        <g transform="translate(40, 20)">
+                            <circle cx="25" cy="20" r="14" fill="#fed7aa"/>
+                            <path d="M15 15 Q25 2 38 12 Q40 22 28 24 Z" fill="#eab308"/>
+                            <path d="M18 34 L32 34 L36 65 L14 65 Z" fill="#3b82f6"/>
+                            <path d="M16 65 L14 85 M30 65 L32 85" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+                            <!-- Jar -->
+                            <rect x="26" y="40" width="16" height="20" rx="3" fill="#86efac" stroke="#16a34a" stroke-width="2"/>
+                            <circle cx="34" cy="50" r="3" fill="#22c55e"/>
+                        </g>
+
+                        <!-- Kid 2 (Boy with box) -->
+                        <g transform="translate(130, 15)">
+                            <circle cx="25" cy="20" r="14" fill="#fcd34d"/>
+                            <path d="M12 18 Q25 4 38 15 Q34 26 22 24 Z" fill="#451a03"/>
+                            <path d="M18 34 L32 34 L36 68 L14 68 Z" fill="#64748b"/>
+                            <path d="M18 68 L16 90 M28 68 L30 90" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+                            <!-- Gift Box -->
+                            <rect x="22" y="38" width="22" height="20" rx="4" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+                        </g>
+
+                        <!-- Kid 3 (Girl with jar) -->
+                        <g transform="translate(225, 20)">
+                            <circle cx="25" cy="20" r="14" fill="#fed7aa"/>
+                            <path d="M12 12 Q25 0 38 12 Q42 32 34 30 L16 30 Z" fill="#9a3412"/>
+                            <path d="M18 34 L32 34 L38 65 L12 65 Z" fill="#ec4899"/>
+                            <path d="M16 65 L14 85 M30 65 L32 85" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+                            <!-- Green Jar -->
+                            <rect x="26" y="40" width="16" height="20" rx="3" fill="#6ee7b7" stroke="#059669" stroke-width="2"/>
+                        </g>
+
+                        <!-- Kid 4 (Boy with piggy bank) -->
+                        <g transform="translate(320, 20)">
+                            <circle cx="25" cy="20" r="14" fill="#fed7aa"/>
+                            <path d="M12 16 Q25 4 38 14 Q38 25 24 24 Z" fill="#334155"/>
+                            <path d="M18 34 L32 34 L36 65 L14 65 Z" fill="#0284c7"/>
+                            <path d="M16 65 L14 85 M30 65 L32 85" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+                            <!-- Jar -->
+                            <rect x="26" y="40" width="16" height="20" rx="3" fill="#a7f3d0" stroke="#047857" stroke-width="2"/>
+                        </g>
+
+                        <!-- Kid 5 (Girl with piggy bank) -->
+                        <g transform="translate(410, 18)">
+                            <circle cx="25" cy="20" r="14" fill="#fde68a"/>
+                            <path d="M12 12 Q25 2 38 12 Q44 32 32 32 L16 30 Z" fill="#b45309"/>
+                            <path d="M18 34 L32 34 L38 66 L12 66 Z" fill="#f43f5e"/>
+                            <path d="M16 66 L14 88 M30 66 L32 88" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+                            <!-- Piggy bank -->
+                            <ellipse cx="36" cy="50" rx="14" ry="10" fill="#f472b6" stroke="#db2777" stroke-width="2"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="view-matching" class="tab-view hidden">
+            <div class="bg-white rounded-3xl p-4 sm:p-6 border-3 border-purple-300 shadow-md max-w-3xl mx-auto">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-purple-100 flex-wrap gap-2">
+                    <div>
+                        <h3 class="font-black text-slate-800 text-base sm:text-lg flex items-center gap-1.5 font-cairo" dir="rtl">
+                            <span>🏹</span>
+                            <span>صل الرقم الترتيبي بالاسم المكتوب بالأسهم</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 font-semibold font-cairo" dir="rtl">اضغط على الرقم الترتيبي في اليسار ثم اختر اسمه المكتوب في اليمين لرسم السهم</p>
+                    </div>
+                    <button onclick="initMatchingArrowsGame()" class="px-3.5 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1">
+                        <span>🔀</span>
+                        <span>جولة جديدة</span>
+                    </button>
+                </div>
+
+                <!-- Matching Container with SVG Arrow Canvas -->
+                <div class="relative min-h-[380px] p-2" id="ordinalMatchContainer">
+                    <svg id="ordinalSvgCanvas" class="pointer-events-none absolute inset-0 w-full h-full z-15" style="overflow: visible;">
+                        <defs id="ordinalSvgDefs"></defs>
+                        <g id="ordinalSvgArrowsGroup"></g>
+                    </svg>
+
+                    <!-- 2 Columns Grid -->
+                    <div class="grid grid-cols-2 gap-8 sm:gap-16 md:gap-20 relative z-10">
+                        <div class="flex flex-col gap-3" id="matchLeftCol"></div>
+                        <div class="flex flex-col gap-3" id="matchRightCol"></div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-4 pt-3 border-t border-purple-100 text-xs font-bold text-slate-600 flex-wrap gap-2">
+                    <div>
+                        تم التوصيل: <span id="matchArrowsDone" class="text-purple-700 font-black text-sm">0</span> من <span id="matchArrowsTotal" class="font-black text-sm">5</span> أسهم 🎯
+                    </div>
+                    <div id="matchGuideLabel" class="text-sky-600 font-extrabold bg-sky-50 px-3 py-1 rounded-full border border-sky-200 font-cairo">
+                        اختر رقماً في اليسار لبدء السهم
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-unscramble" class="tab-view hidden">
+            <div class="bg-white rounded-3xl p-4 sm:p-6 border-3 border-emerald-300 shadow-md max-w-xl mx-auto text-center">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-emerald-100">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-base">🔠</span>
+                        <span class="text-xs font-black text-slate-800 font-cairo">رتب حروف الكلمة الترتيبية</span>
+                    </div>
+                    <button onclick="nextUnscrambleWord()" class="px-3 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-xs font-bold transition-all">
+                        كلمة أخرى ↻
+                    </button>
+                </div>
+
+                <!-- Target Number Badge -->
+                <div class="bg-emerald-50/80 p-4 rounded-2xl border-2 border-emerald-200 mb-4 inline-flex items-center justify-center gap-4 min-w-[200px]">
+                    <div class="text-3xl sm:text-4xl">
+                        <span id="unscrambleNumberVal" class="balloon-num-gold">1</span><sup id="unscrambleSuperVal" class="ordinal-super-red text-base sm:text-lg">st</sup>
+                    </div>
+                    <span id="unscrambleArabicMeaning" class="font-cairo font-bold text-emerald-800 text-sm bg-white px-2.5 py-1 rounded-lg border border-emerald-200">الأول</span>
+                </div>
+
+                <!-- Solution Slots Row -->
+                <div class="text-xs font-bold text-slate-500 mb-2 font-cairo">ضع الحروف بالترتيب الصحيح:</div>
+                <div id="unscrambleSlots" class="flex items-center justify-center gap-1.5 sm:gap-2 mb-5 flex-wrap min-h-[50px]">
+                    <!-- Slots populated by JS -->
+                </div>
+
+                <!-- Scrambled Letters Pool -->
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 mb-4">
+                    <div id="unscrambleLetterPool" class="flex items-center justify-center gap-2 flex-wrap">
+                        <!-- Clickable letters populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="flex items-center justify-center gap-2">
+                    <button onclick="resetCurrentUnscramble()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl">
+                        إعادة المسح 🔄
+                    </button>
+                    <button onclick="giveUnscrambleHint()" class="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-800 text-xs font-bold rounded-xl flex items-center gap-1">
+                        <span>💡</span><span>تلميح</span>
+                    </button>
+                </div>
+
+                <div id="unscrambleFeedback" class="mt-3 min-h-[26px] text-xs font-black font-cairo"></div>
+            </div>
+        </div>
+
+        <div id="view-quiz" class="tab-view hidden">
+            <div class="bg-white rounded-3xl p-4 sm:p-6 border-3 border-rose-300 shadow-md max-w-xl mx-auto text-center">
+                
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-rose-100">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-rose-500 text-white px-2.5 py-0.5 rounded-lg text-xs font-black">⚠️ QUIZ</span>
+                        <span id="quizProgressBadge" class="text-xs font-black text-rose-700 font-cairo">السؤال 1 من 8</span>
+                    </div>
+                    <button onclick="resetQuizAndStart()" class="px-3 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl text-xs font-bold">
+                        إعادة الجولة ↻
+                    </button>
+                </div>
+
+                <!-- Active Question Container -->
+                <div id="quizActiveContainer">
+                    <div class="font-cairo text-sm font-bold text-slate-700 mb-2">
+                        ما هو الإملاء الترتيبي الصحيح للرقم التالي؟
+                    </div>
+
+                    <!-- Target Number Display -->
+                    <div class="bg-rose-50/80 p-4 rounded-2xl border-2 border-rose-200 mb-5 flex items-center justify-center gap-3">
+                        <div class="text-3xl sm:text-4xl">
+                            <span id="quizNumBalloon" class="balloon-num-gold">5</span><sup id="quizNumSuper" class="ordinal-super-red text-base sm:text-lg">th</sup>
+                        </div>
+                        <span id="quizArabicTrans" class="font-cairo font-bold text-rose-800 text-sm bg-white px-2.5 py-1 rounded-lg border border-rose-200">الخامس</span>
+                    </div>
+
+                    <!-- Multiple Choices Grid -->
+                    <div class="text-xs font-bold text-slate-500 mb-2 font-cairo">اختر الكلمة الصحيحة:</div>
+                    <div id="quizChoicesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Finished Round Screen -->
+                <div id="quizFinishedContainer" class="hidden py-6 space-y-3">
+                    <div class="text-4xl animate-bounce">🏆</div>
+                    <h3 class="font-cairo font-black text-xl text-emerald-600">أحسنت صنعاً! أتممت جميع الأسئلة بنجاح!</h3>
+                    <p class="font-cairo text-xs font-bold text-slate-500">لقد أتقنت إملاء الأعداد الترتيبية الاستثنائية بامتياز.</p>
+                    <button onclick="resetQuizAndStart()" class="mt-2 px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-black text-sm shadow-md transition-all">
+                        بدء جولة جديدة ↻
+                    </button>
+                </div>
+
+                <div id="quizFeedback" class="min-h-[28px] text-xs font-black font-cairo"></div>
+            </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t-2 border-dashed border-amber-200 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-slate-500 font-cairo">
+            <div class="flex items-center gap-1.5">
+                <span>⭐</span>
+                <span>تصميم تفاعلي مستوحى من ورقة عمل الأعداد الترتيبية للأستاذ ماجد السويهري</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-md font-extrabold">LANGUA LEARN 🎓</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Full Ordinal Dataset from Worksheet
+        const ORDINAL_DATA = [
+            { short: '1st',  num: '1',  super: 'st', word: 'First',       arabic: 'الأول',       color: '#ea580c' },
+            { short: '2nd',  num: '2',  super: 'nd', word: 'Second',      arabic: 'الثاني',      color: '#0284c7' },
+            { short: '3rd',  num: '3',  super: 'rd', word: 'Third',       arabic: 'الثالث',      color: '#9333ea' },
+            { short: '5th',  num: '5',  super: 'th', word: 'Fifth',       arabic: 'الخامس',      color: '#e11d48' },
+            { short: '6th',  num: '6',  super: 'th', word: 'Sixth',       arabic: 'السادس',      color: '#16a34a' },
+            { short: '7th',  num: '7',  super: 'th', word: 'Seventh',     arabic: 'السابع',      color: '#ca8a04' },
+            { short: '8th',  num: '8',  super: 'th', word: 'Eighth',      arabic: 'الثامن',      color: '#0d9488' },
+            { short: '10th', num: '10', super: 'th', word: 'Tenth',       arabic: 'العاشر',      color: '#4f46e5' },
+            { short: '11th', num: '11', super: 'th', word: 'Eleventh',    arabic: 'الحادي عشر',  color: '#0284c7' },
+            { short: '12th', num: '12', super: 'th', word: 'Twelfth',     arabic: 'الثاني عشر',  color: '#e11d48' },
+            { short: '13th', num: '13', super: 'th', word: 'Thirteenth',  arabic: 'الثالث عشر',  color: '#9333ea' },
+            { short: '14th', num: '14', super: 'th', word: 'Fourteenth',  arabic: 'الرابع عشر',  color: '#16a34a' },
+            { short: '15th', num: '15', super: 'th', word: 'Fifteenth',   arabic: 'الخامس عشر',  color: '#d97706' },
+            { short: '16th', num: '16', super: 'th', word: 'Sixteenth',   arabic: 'السادس عشر',  color: '#0891b2' },
+            { short: '17th', num: '17', super: 'th', word: 'Seventeenth', arabic: 'السابع عشر',  color: '#4338ca' },
+            { short: '18th', num: '18', super: 'th', word: 'Eighteenth',  arabic: 'الثامن عشر',  color: '#b45309' },
+            { short: '19th', num: '19', super: 'th', word: 'Nineteenth',  arabic: 'التاسع عشر',  color: '#be185d' },
+            { short: '20th', num: '20', super: 'th', word: 'Twentieth',   arabic: 'العشرون',     color: '#2563eb' }
+        ];
+
+        // Global State Variables
+        let isSlowSpeech = false;
+        let soundEffectsEnabled = true;
+        let selectedVoice = null;
+        let availableVoices = [];
+        let audioCtx = null;
+        let activeTab = 'lesson';
+        let isTourActive = false;
+
+        // Matching State
+        let selectedMatchItem = null;
+        let activeMatchPairs = [];
+        let matchedCount = 0;
+        let drawnArrows = [];
+
+        // Unscramble State
+        let currentUnscrambleIndex = 0;
+        let currentUnscrambleWord = '';
+        let unscramblePlacedLetters = [];
+        let unscramblePoolLetters = [];
+
+        // Quiz State (Non-repeating pool)
+        const QUIZ_SOURCE_DATA = [
+            { num: '5',  super: 'th', correct: 'Fifth',       options: ['Fifth', 'Fiveth', 'Fivth', 'Fifeth'], arabic: 'الخامس' },
+            { num: '12', super: 'th', correct: 'Twelfth',     options: ['Twelfth', 'Twelveth', 'Twelth', 'Twelfeth'], arabic: 'الثاني عشر' },
+            { num: '8',  super: 'th', correct: 'Eighth',      options: ['Eighth', 'Eightth', 'Eigth', 'Eighteeth'], arabic: 'الثامن' },
+            { num: '20', super: 'th', correct: 'Twentieth',   options: ['Twentieth', 'Twentyth', 'Twenteeth', 'Twenties'], arabic: 'العشرون' },
+            { num: '1',  super: 'st', correct: 'First',       options: ['First', 'Oneth', 'Firset', '1th'], arabic: 'الأول' },
+            { num: '2',  super: 'nd', correct: 'Second',      options: ['Second', 'Twoth', 'Secound', '2th'], arabic: 'الثاني' },
+            { num: '3',  super: 'rd', correct: 'Third',       options: ['Third', 'Threeth', 'Thrid', '3th'], arabic: 'الثالث' },
+            { num: '9',  super: 'th', correct: 'Ninth',       options: ['Ninth', 'Nineth', 'Ninethth', 'Ninthy'], arabic: 'التاسع' }
+        ];
+        let currentQuizItem = null;
+        let remainingQuizQuestions = [];
+        const totalQuizQuestions = QUIZ_SOURCE_DATA.length;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioCtxClass) audioCtx = new AudioCtxClass();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+            return audioCtx;
+        }
+
+        function playChime(type = 'click') {
+            if (!soundEffectsEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                const now = ctx.currentTime;
+
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(520, now);
+                    osc.frequency.exponentialRampToValueAtTime(820, now + 0.08);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'success') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.09); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.18); // G5
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                } else if (type === 'error') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(240, now);
+                    osc.frequency.setValueAtTime(160, now + 0.12);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+
+        function loadVoices() {
+            if (!('speechSynthesis' in window)) return;
+            const voices = window.speechSynthesis.getVoices();
+            if (!voices || voices.length === 0) return;
+
+            availableVoices = voices.filter(v => v.lang.startsWith('en'));
+            const selectEl = document.getElementById('voiceSelect');
+            selectEl.innerHTML = '<option value="">Auto Natural Voice</option>';
+
+            availableVoices.forEach((v, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = `${v.name} (${v.lang})`;
+                selectEl.appendChild(opt);
+            });
+
+            // Priority: Natural > Google US > Samantha > Jenny
+            const best = availableVoices.find(v => 
+                v.name.includes('Natural') || 
+                v.name.includes('Google US') || 
+                v.name.includes('Samantha') || 
+                v.name.includes('Jenny')
+            );
+            if (best) selectedVoice = best;
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+            loadVoices();
+        }
+
+        function changeVoice() {
+            const val = document.getElementById('voiceSelect').value;
+            selectedVoice = val === '' ? null : availableVoices[parseInt(val, 10)] || null;
+        }
+
+        function toggleSpeechRate() {
+            isSlowSpeech = !isSlowSpeech;
+            document.getElementById('speedLabel').textContent = isSlowSpeech ? 'Slow (0.7x)' : 'Normal';
+            document.getElementById('speedBtn').querySelector('span:first-child').textContent = isSlowSpeech ? '🐢' : '🐇';
+            playChime('click');
+        }
+
+        function toggleAudioFX() {
+            soundEffectsEnabled = !soundEffectsEnabled;
+            document.getElementById('soundToggleBtn').textContent = soundEffectsEnabled ? '🔊' : '🔇';
+        }
+
+        function speakEnglish(text, onComplete = null) {
+            if (!('speechSynthesis' in window)) {
+                if (onComplete) setTimeout(onComplete, 800);
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'en-US';
+            utter.rate = isSlowSpeech ? 0.72 : 0.95;
+            utter.pitch = 1.0;
+            if (selectedVoice) utter.voice = selectedVoice;
+
+            utter.onend = () => { if (typeof onComplete === 'function') onComplete(); };
+            utter.onerror = () => { if (typeof onComplete === 'function') onComplete(); };
+
+            window.speechSynthesis.speak(utter);
+        }
+
+        function speakOrdinal(word, short, arabic) {
+            playChime('click');
+
+            // Light up card during speech
+            const card = document.getElementById(`card-${short}`);
+            if (card) {
+                document.querySelectorAll('.is-speaking-active').forEach(c => c.classList.remove('is-speaking-active'));
+                card.classList.add('is-speaking-active');
+            }
+
+            speakEnglish(word, () => {
+                if (card) card.classList.remove('is-speaking-active');
+            });
+        }
+
+        function greetTeacher() {
+            playChime('click');
+            speakEnglish("Welcome to Teacher Majed Al-Swaihri's Ordinal Numbers Lesson!");
+        }
+
+        function readFullLessonTour() {
+            if (isTourActive) {
+                isTourActive = false;
+                window.speechSynthesis.cancel();
+                document.getElementById('tourBtn').innerHTML = '<span>▶️</span><span>Listen All (استمع لجميع الأعداد)</span>';
+                document.querySelectorAll('.is-speaking-active').forEach(c => c.classList.remove('is-speaking-active'));
+                return;
+            }
+
+            isTourActive = true;
+            document.getElementById('tourBtn').innerHTML = '<span>⏹️</span><span>Stop Tour (إيقاف)</span>';
+
+            let idx = 0;
+            function playNext() {
+                if (!isTourActive || idx >= ORDINAL_DATA.length) {
+                    isTourActive = false;
+                    document.getElementById('tourBtn').innerHTML = '<span>▶️</span><span>Listen All (استمع لجميع الأعداد)</span>';
+                    document.querySelectorAll('.is-speaking-active').forEach(c => c.classList.remove('is-speaking-active'));
+                    if (idx >= ORDINAL_DATA.length) celebrateConfetti();
+                    return;
+                }
+
+                const item = ORDINAL_DATA[idx];
+                const card = document.getElementById(`card-${item.short}`);
+                document.querySelectorAll('.is-speaking-active').forEach(c => c.classList.remove('is-speaking-active'));
+                if (card) card.classList.add('is-speaking-active');
+
+                speakEnglish(item.word, () => {
+                    idx++;
+                    setTimeout(() => { if (isTourActive) playNext(); }, 400);
+                });
+            }
+            playNext();
+        }
+
+        function initMatchingArrowsGame() {
+            activeMatchPairs = [...ORDINAL_DATA].sort(() => Math.random() - 0.5).slice(0, 5);
+            matchedCount = 0;
+            selectedMatchItem = null;
+            drawnArrows = [];
+
+            document.getElementById('matchArrowsDone').textContent = '0';
+            document.getElementById('matchArrowsTotal').textContent = activeMatchPairs.length;
+            document.getElementById('matchGuideLabel').textContent = 'اختر رقماً في اليسار لبدء السهم';
+
+            // Clear SVG Canvas
+            const defs = document.getElementById('ordinalSvgDefs');
+            const group = document.getElementById('ordinalSvgArrowsGroup');
+            if (defs) defs.innerHTML = '';
+            if (group) group.innerHTML = '';
+
+            const leftCol = document.getElementById('matchLeftCol');
+            const rightCol = document.getElementById('matchRightCol');
+
+            const shuffledLeft = [...activeMatchPairs].sort(() => Math.random() - 0.5);
+            const shuffledRight = [...activeMatchPairs].sort(() => Math.random() - 0.5);
+
+            // Render Left Column (Gold Short forms)
+            leftCol.innerHTML = shuffledLeft.map(item => `
+                <button id="match-l-${item.short}" onclick="selectMatchLeft('${item.short}')" class="p-3 sm:p-3.5 rounded-2xl bg-white border-2 border-sky-300 flex items-center justify-between shadow-2xs font-black relative select-none hover:bg-sky-50 transition-all">
+                    <div class="flex items-center gap-1.5 pl-1.5">
+                        <span class="balloon-num-gold text-3xl sm:text-4xl">${item.num}</span>
+                        <sup class="ordinal-super-red text-lg sm:text-xl font-black">${item.super}</sup>
+                    </div>
+                    <div id="pin-l-${item.short}" class="connector-pin absolute -right-2 top-1/2 -translate-y-1/2" style="background:${item.color}"></div>
+                </button>
+            `).join('');
+
+            // Render Right Column (Written Names)
+            rightCol.innerHTML = shuffledRight.map(item => `
+                <button id="match-r-${item.short}" onclick="selectMatchRight('${item.short}')" class="p-3 sm:p-3.5 rounded-2xl bg-white border-2 border-purple-300 flex items-center justify-between shadow-2xs font-fredoka font-black text-lg sm:text-xl text-purple-900 relative select-none hover:bg-purple-50 transition-all">
+                    <div id="pin-r-${item.short}" class="connector-pin absolute -left-2 top-1/2 -translate-y-1/2" style="background:${item.color}"></div>
+                    <span class="pl-3">${item.word}</span>
+                </button>
+            `).join('');
+        }
+
+        function selectMatchLeft(short) {
+            if (drawnArrows.some(a => a.short === short)) return;
+            playChime('click');
+            selectedMatchItem = short;
+
+            document.querySelectorAll('#matchLeftCol button').forEach(b => b.classList.remove('ring-4', 'ring-sky-400'));
+            document.querySelectorAll('#matchLeftCol .connector-pin').forEach(p => p.classList.remove('active-pulse'));
+
+            const btn = document.getElementById(`match-l-${short}`);
+            const pin = document.getElementById(`pin-l-${short}`);
+            if (btn) btn.classList.add('ring-4', 'ring-sky-400');
+            if (pin) pin.classList.add('active-pulse');
+
+            const item = activeMatchPairs.find(d => d.short === short);
+            if (item) speakEnglish(item.word);
+            document.getElementById('matchGuideLabel').textContent = `الآن اختر اسم (${short}) من العمود الأيمن 🏹`;
+        }
+
+        function selectMatchRight(short) {
+            if (!selectedMatchItem) {
+                playChime('click');
+                document.getElementById('matchGuideLabel').textContent = 'الرجاء اختيار رقم في اليسار أولاً 👈';
+                return;
+            }
+
+            if (drawnArrows.some(a => a.short === short)) return;
+
+            if (selectedMatchItem === short) {
+                // Correct Match
+                playChime('success');
+                const data = activeMatchPairs.find(d => d.short === short);
+                const color = data ? data.color : '#0284c7';
+
+                const leftBtn = document.getElementById(`match-l-${short}`);
+                const rightBtn = document.getElementById(`match-r-${short}`);
+                if (leftBtn) {
+                    leftBtn.classList.remove('ring-4', 'ring-sky-400');
+                    leftBtn.classList.add('opacity-80', 'bg-slate-50', 'pointer-events-none');
+                }
+                if (rightBtn) {
+                    rightBtn.classList.add('opacity-80', 'bg-slate-50', 'pointer-events-none');
+                }
+
+                const arrowObj = { short, color };
+                drawnArrows.push(arrowObj);
+                matchedCount++;
+                document.getElementById('matchArrowsDone').textContent = matchedCount;
+
+                drawArrowOnCanvas(arrowObj);
+                speakEnglish(data.word);
+
+                if (matchedCount >= activeMatchPairs.length) {
+                    celebrateConfetti();
+                    document.getElementById('matchGuideLabel').textContent = '🎉 أحسنت صنعاً! تم توصيل جميع الأسهم بنجاح!';
+                } else {
+                    document.getElementById('matchGuideLabel').textContent = 'ممتاز! اختر رقماً آخر 🎯';
+                }
+            } else {
+                playChime('error');
+                const rightBtn = document.getElementById(`match-r-${short}`);
+                if (rightBtn) {
+                    rightBtn.classList.add('border-rose-400', 'bg-rose-50');
+                    setTimeout(() => rightBtn.classList.remove('border-rose-400', 'bg-rose-50'), 400);
+                }
+                document.getElementById('matchGuideLabel').textContent = '❌ غير متطابقين! حاول مرة أخرى';
+            }
+
+            selectedMatchItem = null;
+            document.querySelectorAll('#matchLeftCol button').forEach(b => b.classList.remove('ring-4', 'ring-sky-400'));
+            document.querySelectorAll('#matchLeftCol .connector-pin').forEach(p => p.classList.remove('active-pulse'));
+        }
+
+        function drawArrowOnCanvas(match) {
+            const container = document.getElementById('ordinalMatchContainer');
+            const leftPin = document.getElementById(`pin-l-${match.short}`);
+            const rightPin = document.getElementById(`pin-r-${match.short}`);
+            const defs = document.getElementById('ordinalSvgDefs');
+            const group = document.getElementById('ordinalSvgArrowsGroup');
+
+            if (!container || !leftPin || !rightPin || !defs || !group) return;
+
+            const cRect = container.getBoundingClientRect();
+            const lRect = leftPin.getBoundingClientRect();
+            const rRect = rightPin.getBoundingClientRect();
+
+            const x1 = lRect.left + (lRect.width / 2) - cRect.left;
+            const y1 = lRect.top + (lRect.height / 2) - cRect.top;
+            const x2 = rRect.left + (rRect.width / 2) - cRect.left;
+            const y2 = rRect.top + (rRect.height / 2) - cRect.top;
+
+            const markerId = `ordinal-head-${match.short}`;
+            if (!document.getElementById(markerId)) {
+                const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+                marker.setAttribute('id', markerId);
+                marker.setAttribute('markerWidth', '9');
+                marker.setAttribute('markerHeight', '7');
+                marker.setAttribute('refX', '7');
+                marker.setAttribute('refY', '3.5');
+                marker.setAttribute('orient', 'auto');
+                marker.setAttribute('markerUnits', 'strokeWidth');
+                marker.innerHTML = `<polygon points="0 0.8, 7 3.5, 0 6.2" fill="${match.color}" />`;
+                defs.appendChild(marker);
+            }
+
+            const deltaX = (x2 - x1) * 0.45;
+            const pathData = `M ${x1} ${y1} C ${x1 + deltaX} ${y1}, ${x2 - deltaX} ${y2}, ${x2 - 4} ${y2}`;
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('id', `arrow-path-${match.short}`);
+            path.setAttribute('d', pathData);
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke', match.color);
+            path.setAttribute('stroke-width', '3.5');
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('marker-end', `url(#${markerId})`);
+            path.classList.add('match-arrow-path');
+            group.appendChild(path);
+        }
+
+        function redrawAllOrdinalArrows() {
+            const group = document.getElementById('ordinalSvgArrowsGroup');
+            if (!group) return;
+            group.innerHTML = '';
+            drawnArrows.forEach(a => drawArrowOnCanvas(a));
+        }
+
+        window.addEventListener('resize', () => {
+            if (activeTab === 'matching') redrawAllOrdinalArrows();
+        });
+
+        function loadUnscrambleWord(item) {
+            currentUnscrambleWord = item.word.toUpperCase();
+            unscramblePlacedLetters = [];
+            unscramblePoolLetters = currentUnscrambleWord.split('').map((char, id) => ({ id, char, used: false })).sort(() => Math.random() - 0.5);
+
+            document.getElementById('unscrambleNumberVal').textContent = item.num;
+            document.getElementById('unscrambleSuperVal').textContent = item.super;
+            document.getElementById('unscrambleArabicMeaning').textContent = item.arabic;
+            document.getElementById('unscrambleFeedback').textContent = '';
+
+            renderUnscrambleUI();
+            speakEnglish(item.word);
+        }
+
+        function renderUnscrambleUI() {
+            // Render Slots
+            const slotsContainer = document.getElementById('unscrambleSlots');
+            slotsContainer.innerHTML = '';
+            for (let i = 0; i < currentUnscrambleWord.length; i++) {
+                const letter = unscramblePlacedLetters[i];
+                const slot = document.createElement('div');
+                slot.className = `w-10 h-12 sm:w-12 sm:h-14 rounded-2xl border-2 flex items-center justify-center font-fredoka font-black text-xl sm:text-2xl transition-all ${
+                    letter ? 'bg-white border-emerald-400 text-emerald-800 shadow-xs' : 'bg-slate-100 border-dashed border-slate-300 text-transparent'
+                }`;
+                slot.textContent = letter ? letter.char : '';
+                if (letter) {
+                    slot.style.cursor = 'pointer';
+                    slot.title = 'Click to remove letter';
+                    slot.onclick = () => removeLetterFromSlot(i);
+                }
+                slotsContainer.appendChild(slot);
+            }
+
+            // Render Letter Pool
+            const poolContainer = document.getElementById('unscrambleLetterPool');
+            poolContainer.innerHTML = unscramblePoolLetters.map(p => `
+                <button onclick="pickUnscrambleLetter(${p.id})" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border-2 border-slate-200 hover:border-emerald-400 font-fredoka font-black text-lg sm:text-xl text-slate-800 shadow-xs transition-transform active:scale-90 ${
+                    p.used ? 'opacity-30 pointer-events-none' : ''
+                }">
+                    ${p.char}
+                </button>
+            `).join('');
+        }
+
+        function pickUnscrambleLetter(id) {
+            const letterObj = unscramblePoolLetters.find(l => l.id === id);
+            if (!letterObj || letterObj.used) return;
+            if (unscramblePlacedLetters.length >= currentUnscrambleWord.length) return;
+
+            playChime('click');
+            letterObj.used = true;
+            unscramblePlacedLetters.push(letterObj);
+            renderUnscrambleUI();
+
+            // Check if word completed
+            if (unscramblePlacedLetters.length === currentUnscrambleWord.length) {
+                const built = unscramblePlacedLetters.map(l => l.char).join('');
+                if (built === currentUnscrambleWord) {
+                    playChime('success');
+                    celebrateConfetti();
+                    document.getElementById('unscrambleFeedback').innerHTML = `<span class="text-emerald-600 font-extrabold text-sm">🎉 ممتاز! الإملاء صحيح: ${currentUnscrambleWord}</span>`;
+                    speakEnglish('Correct');
+                } else {
+                    playChime('error');
+                    document.getElementById('unscrambleFeedback').innerHTML = `<span class="text-rose-600 font-bold">❌ ترتيب الحروف غير صحيح! انقر على الحرف لإزالته وإعادة المحاولة</span>`;
+                }
+            }
+        }
+
+        function removeLetterFromSlot(index) {
+            playChime('click');
+            const removed = unscramblePlacedLetters.splice(index, 1)[0];
+            if (removed) {
+                const poolItem = unscramblePoolLetters.find(l => l.id === removed.id);
+                if (poolItem) poolItem.used = false;
+            }
+            document.getElementById('unscrambleFeedback').textContent = '';
+            renderUnscrambleUI();
+        }
+
+        function resetCurrentUnscramble() {
+            playChime('click');
+            unscramblePlacedLetters = [];
+            unscramblePoolLetters.forEach(l => l.used = false);
+            document.getElementById('unscrambleFeedback').textContent = '';
+            renderUnscrambleUI();
+        }
+
+        function giveUnscrambleHint() {
+            playChime('click');
+            const nextIdx = unscramblePlacedLetters.length;
+            if (nextIdx < currentUnscrambleWord.length) {
+                const neededChar = currentUnscrambleWord[nextIdx];
+                const poolItem = unscramblePoolLetters.find(l => l.char === neededChar && !l.used);
+                if (poolItem) {
+                    pickUnscrambleLetter(poolItem.id);
+                }
+            }
+        }
+
+        function nextUnscrambleWord() {
+            playChime('click');
+            currentUnscrambleIndex = (currentUnscrambleIndex + 1) % ORDINAL_DATA.length;
+            loadUnscrambleWord(ORDINAL_DATA[currentUnscrambleIndex]);
+        }
+
+        function resetQuizPool() {
+            // Shuffle all questions to prevent repeats
+            remainingQuizQuestions = [...QUIZ_SOURCE_DATA].sort(() => Math.random() - 0.5);
+        }
+
+        function resetQuizAndStart() {
+            resetQuizPool();
+            document.getElementById('quizActiveContainer').classList.remove('hidden');
+            document.getElementById('quizFinishedContainer').classList.add('hidden');
+            document.getElementById('quizFeedback').textContent = '';
+            generateTrickyQuestion();
+        }
+
+        function generateTrickyQuestion() {
+            const activeBox = document.getElementById('quizActiveContainer');
+            const finishedBox = document.getElementById('quizFinishedContainer');
+            const progressBadge = document.getElementById('quizProgressBadge');
+            const feedback = document.getElementById('quizFeedback');
+
+            // If empty, complete the game
+            if (!remainingQuizQuestions || remainingQuizQuestions.length === 0) {
+                if (activeBox) activeBox.classList.add('hidden');
+                if (finishedBox) finishedBox.classList.remove('hidden');
+                if (progressBadge) progressBadge.textContent = 'اكتملت الجولة 🎉';
+                if (feedback) feedback.textContent = '';
+                celebrateConfetti();
+                playChime('success');
+                return;
+            }
+
+            if (activeBox) activeBox.classList.remove('hidden');
+            if (finishedBox) finishedBox.classList.add('hidden');
+
+            currentQuizItem = remainingQuizQuestions.pop();
+            const currentIdx = totalQuizQuestions - remainingQuizQuestions.length;
+
+            if (progressBadge) {
+                progressBadge.textContent = `السؤال ${currentIdx} من ${totalQuizQuestions}`;
+            }
+
+            document.getElementById('quizNumBalloon').textContent = currentQuizItem.num;
+            document.getElementById('quizNumSuper').textContent = currentQuizItem.super;
+            document.getElementById('quizArabicTrans').textContent = currentQuizItem.arabic;
+            if (feedback) feedback.textContent = '';
+
+            const choices = [...currentQuizItem.options].sort(() => Math.random() - 0.5);
+            const grid = document.getElementById('quizChoicesGrid');
+            grid.innerHTML = choices.map(choice => `
+                <button onclick="checkTrickyAnswer('${choice}')" class="p-3 bg-rose-50 hover:bg-rose-100 text-slate-800 font-fredoka font-black text-xl rounded-2xl border-2 border-rose-200 shadow-xs transition-transform active:scale-95">
+                    ${choice}
+                </button>
+            `).join('');
+        }
+
+        function checkTrickyAnswer(selected) {
+            const feedback = document.getElementById('quizFeedback');
+            if (selected === currentQuizItem.correct) {
+                playChime('success');
+                celebrateConfetti();
+                feedback.innerHTML = `<span class="text-emerald-600 font-extrabold text-sm">🎉 ممتاز! الإملاء الصحيح: ${currentQuizItem.correct}</span>`;
+                
+                // Strictly speak "Correct" only
+                speakEnglish('Correct');
+                setTimeout(generateTrickyQuestion, 1600);
+            } else {
+                playChime('error');
+                feedback.innerHTML = `<span class="text-rose-600">❌ حاول مرة أخرى! انتبه لتغييرات الحروف</span>`;
+            }
+        }
+
+        function switchMode(modeId) {
+            activeTab = modeId;
+            playChime('click');
+
+            document.querySelectorAll('.tab-view').forEach(v => {
+                v.classList.add('hidden');
+                v.classList.remove('block');
+            });
+            const selected = document.getElementById(`view-${modeId}`);
+            if (selected) {
+                selected.classList.remove('hidden');
+                selected.classList.add('block');
+            }
+
+            document.querySelectorAll('.mode-tab-btn').forEach(b => {
+                b.classList.remove('bg-sky-600', 'text-white', 'shadow-md');
+                b.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+            });
+            const activeBtn = document.getElementById(`tabBtn-${modeId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+                activeBtn.classList.add('bg-sky-600', 'text-white', 'shadow-md');
+            }
+
+            if (modeId === 'matching') {
+                initMatchingArrowsGame();
+                setTimeout(redrawAllOrdinalArrows, 60);
+            }
+            if (modeId === 'unscramble') {
+                loadUnscrambleWord(ORDINAL_DATA[currentUnscrambleIndex]);
+            }
+            if (modeId === 'quiz') {
+                if (remainingQuizQuestions.length === 0 && !currentQuizItem) {
+                    resetQuizAndStart();
+                }
+            }
+        }
+
+        function celebrateConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 55,
+                    spread: 70,
+                    origin: { y: 0.7 }
+                });
+            }
+        }
+
+        window.onload = function() {
+            initMatchingArrowsGame();
+            loadUnscrambleWord(ORDINAL_DATA[0]);
+            resetQuizPool();
+            generateTrickyQuestion();
+        };
+    </script>
+</body>
+</html>
